@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="A hardware-aware DSA study board: 20 chapters, detailed HFT sticky notes, interview answer guides, and engineering drills.">
+  <title>The Hot Path | HFT DSA Study Board</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23d9f36e'/%3E%3Cpath d='M35 8 16 35h15l-3 21 21-30H34z' fill='%23141920'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="chapters.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to study content</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Chapter navigation">
+      <a class="brand" href="#chapter-1"><span class="brand-icon" aria-hidden="true">H/</span><span>THE HOT PATH<small>DSA / HFT FIELD GUIDE</small></span></a>
+      <div class="sidebar-intro"><span class="eyebrow">YOUR STUDY DESK</span><p>Less memorizing.<br>More systems thinking.</p></div>
+      <button id="all-chapters" class="all-chapters" type="button"><span>All chapters</span><span class="count">20</span></button>
+      <nav id="chapter-nav" aria-label="Book chapters"></nav>
+      <div class="sidebar-bottom">
+        <div class="progress-label"><span>Chapters reviewed</span><strong id="progress-count">0 / 20</strong></div>
+        <progress id="study-progress" max="20" value="0">0 of 20 chapters reviewed</progress>
+        <p>Saved on this browser. No sign-in. No tracking.</p>
+        <button id="export-progress" class="text-button" type="button">Export progress</button>
+        <label class="text-button import-label" for="import-progress">Import progress</label>
+        <input id="import-progress" type="file" accept=".json,application/json" hidden>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <span class="breadcrumb">ENGINEERING NOTEBOOK <span>/</span> <strong>LOW-LATENCY SYSTEMS</strong></span>
+        <button id="print" class="quiet-button" type="button">Print / PDF</button>
+      </header>
+      <main id="main" tabindex="-1">
+        <section class="hero" aria-labelledby="page-title">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> A HARDWARE-AWARE STUDY COMPANION</div>
+            <h1 id="page-title">Think in cache lines.<br><span>Trade in microseconds.</span></h1>
+            <p>Turn data structures into engineering decisions. Detailed chapter notes, HFT trade-offs, and interview questions that go beyond Big-O.</p>
+            <div class="hero-tags"><span>C++ / systems reasoning</span><span>Tail latency first</span><span>Offline by design</span></div>
+          </div>
+          <div class="hero-diagram" aria-label="Example trading pipeline: feed, book, risk, order">
+            <div class="diagram-caption">ONE EVENT. EVERY CYCLE COUNTS.</div>
+            <div class="pipeline"><span>FEED</span><i aria-hidden="true"></i><span>BOOK</span><i aria-hidden="true"></i><span>RISK</span><i aria-hidden="true"></i><span>ORDER</span></div>
+            <div class="pipeline-line" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <p>Locality <b>+</b> bounded work <b>+</b> ownership</p>
+            <small>A design lens, not a latency guarantee.</small>
+          </div>
+        </section>
+        <section class="overview" aria-label="Study material totals">
+          <div><strong>20</strong><span>book chapters</span></div><div><strong id="note-total">100</strong><span>sticky notes</span></div><div><strong id="question-total">100</strong><span>interview questions</span></div><div><strong>20</strong><span>engineering drills</span></div>
+        </section>
+        <details class="scope-note">
+          <summary>Read this first: source, HFT extensions &amp; correctness</summary>
+          <p>Based on <a href="https://github.com/djiangtw/data-structures-in-practice-public" target="_blank" rel="noopener noreferrer">Data Structures in Practice</a> by Danny Jiang, licensed <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>. These are adapted summaries, not the complete book. The HFT examples, questions, drills, and engineering caveats are new study material; they are not claims or endorsements by the author.</p>
+          <p>The source focuses on systems, firmware, and embedded software, not exclusively trading. Its benchmark numbers and hardware rules are not universal. This guide deliberately strengthens several points: C++ inter-thread synchronization needs atomics, reservation is not publication, lock-free is not wait-free, and a Bloom positive is never proof of membership. No strategy, speed, or hard-real-time guarantee is implied.</p>
+          <p><strong>Suggested route:</strong> 1-4 for measurement and layout; 6-8 and 13 for queues, lookup, and ownership; 5 and 9-12 for order-book structures; 14 and 18-20 for production engineering. Use each drill to test an assumption on your own target hardware.</p>
+        </details>
+        <section class="study-controls" aria-label="Study controls">
+          <div class="search-wrap"><span aria-hidden="true">&#9906;</span><input id="search" type="search" placeholder="Search concepts, questions, or HFT scenarios..." aria-label="Search all chapters"><kbd>/</kbd></div>
+          <div class="control-row">
+            <div class="tabs" role="tablist" aria-label="Study view">
+              <button id="tab-notes" class="tab active" role="tab" aria-selected="true" aria-controls="study-content" type="button" data-view="notes">Sticky board</button>
+              <button id="tab-questions" class="tab" role="tab" aria-selected="false" aria-controls="study-content" tabindex="-1" type="button" data-view="questions">Interview room</button>
+              <button id="tab-drills" class="tab" role="tab" aria-selected="false" aria-controls="study-content" tabindex="-1" type="button" data-view="drills">Engineering drills</button>
+            </div>
+            <div class="filters"><label for="difficulty" class="sr-only">Question difficulty</label><select id="difficulty" aria-label="Question difficulty" hidden><option value="all">All levels</option><option value="Core">Core</option><option value="Advanced">Advanced</option><option value="Design">System design</option><option value="Coding">Coding</option></select><button id="saved-only" class="quiet-button" type="button" aria-pressed="false">Saved only <span id="saved-count">0</span></button><button id="shuffle" class="quiet-button" type="button" hidden>Random question</button></div>
+          </div>
+          <div id="results-line" class="results-line" role="status" aria-live="polite"></div>
+          <p id="storage-warning" class="storage-warning" role="status" hidden></p>
+        </section>
+        <div id="study-content" role="tabpanel" aria-labelledby="tab-notes"></div>
+        <noscript><p class="empty-state">Enable JavaScript to load the study board. You can also <a href="https://github.com/djiangtw/data-structures-in-practice-public/tree/main/manuscript/chapters">read the original book chapters</a>.</p></noscript>
+        <footer><span class="footer-brand">H/ THE HOT PATH</span><p>Adapted from <a href="https://github.com/djiangtw/data-structures-in-practice-public" target="_blank" rel="noopener noreferrer">Data Structures in Practice</a> by Danny Jiang. <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>. Summaries modified; original HFT extensions added. Measure everything. Assume nothing.</p></footer>
+      </main>
+    </div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
